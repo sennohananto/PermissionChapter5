@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(MainActivity::class.java.simpleName, "onDestroy() Dijalankan")
     }
 
-    fun requestLocationPermission() {
+    private fun requestLocationPermission() {
         requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 201)
     }
 
@@ -88,9 +88,12 @@ class MainActivity : AppCompatActivity() {
 
         val location: Location? =
             locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+
+        val latLongText = "Lat: ${location?.latitude} Long : ${location?.longitude}"
+        Log.d(MainActivity::class.simpleName, latLongText)
         Toast.makeText(
             this,
-            "Lat: ${location?.latitude} Long : ${location?.longitude}",
+            latLongText,
             Toast.LENGTH_LONG
         ).show()
     }
