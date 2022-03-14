@@ -11,23 +11,26 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.binar.permissionchapter5.databinding.ActivityMainBinding
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         Log.d(MainActivity::class.java.simpleName, "onCreate() Dijalankan")
 
         Glide.with(this)
             .load("https://img.icons8.com/plasticine/2x/flower.png")
-            .into(ivFlower)
+            .into(binding.ivFlower)
 
-        btnCheckLocation.setOnClickListener {
+        binding.btnCheckLocation.setOnClickListener {
 //            val permissionCheck = checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
             val permissionCheck = checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
 
@@ -40,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        btnPindahActivity.setOnClickListener {
+        binding.btnPindahActivity.setOnClickListener {
             val intentKeActivityKedua = Intent(this, ActivityKedua::class.java)
             startActivity(intentKeActivityKedua)
         }
