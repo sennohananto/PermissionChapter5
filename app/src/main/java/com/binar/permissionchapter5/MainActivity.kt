@@ -86,11 +86,11 @@ class MainActivity : AppCompatActivity() {
         val locationManager =
             applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-        val location: Location =
+        val location: Location? =
             locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
         Toast.makeText(
             this,
-            "Lat: ${location.latitude} Long : ${location.longitude}",
+            "Lat: ${location?.latitude} Long : ${location?.longitude}",
             Toast.LENGTH_LONG
         ).show()
     }
@@ -100,10 +100,11 @@ class MainActivity : AppCompatActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             201 -> {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED &&
-                    permissions[9] == Manifest.permission.ACCESS_FINE_LOCATION
+                    permissions[0] == Manifest.permission.ACCESS_FINE_LOCATION
                 ) {
                     Toast.makeText(this, "Permissions for Location Permitted", Toast.LENGTH_LONG)
                         .show()
